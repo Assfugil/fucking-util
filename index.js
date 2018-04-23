@@ -1,31 +1,44 @@
 'use strict';
 const util = {
   get Category()  { return require('./category') },
-  get Color()     { return require('./color') },
-  get Date()      { return require('./date') },
   get Decimal()   { return require('./decimal') },
-  get Erorr()     { return require('./erorr') },
-  get Events()    { return require('./events/index') },
   get Extend()    { return require('./extend') },
-  get List()      { return require('./list') },
   get RndStr()    { return require('./rndStr') },
-  get Signature() { return require('./signature') },
   get Str()       { return require('./str') },
-  get Type()      { return require('./type') },
-  get Unit()      { return require('./unit') },
-  get Additional()  { return additional }
+  get Time()      { return require('./time') },
+  get Type()      { return require('./type') }
 };
 
 module.exports = util;
 
-const additional = {};
+util.use = function ( key, obj ) {
 
-util.addition = function(name, obj) {
+  let keys = Object.keys ( util );
 
-  additional[name] = obj;
+  if ( keys.indexOf ( key ) > -1 ) {
+
+    throw 'util.use: key ' + key + ' has exists';
+  } else {
+
+    util [ key ] = obj;
+  }
 };
 
-util.additionMap = function(map) {
+util.useMap = function ( map ) {
 
-  util.Extend(additional, map);
+  if ( util.Type.objectForce ( map ) ) {
+
+    let keys = Object.keys ( map );
+
+    for ( let i = 0; i < keys.length; i += 1 ) {
+
+      let key = keys [ i ];
+
+      let obj = map [ key ];
+
+      util.use ( key, obj );
+    }
+  } else {
+
+  }
 };

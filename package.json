@@ -1,0 +1,23 @@
+{
+  "name": "fucking-util",
+  "version": "0.0.2",
+  "description": "util",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lipingruan/fucking-util.git"
+  },
+  "keywords": [
+    "util",
+    "fuck"
+  ],
+  "author": "lipingruan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lipingruan/fucking-util/issues"
+  },
+  "homepage": "https://github.com/lipingruan/fucking-util#readme"
+}
