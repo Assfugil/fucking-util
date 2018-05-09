@@ -113,7 +113,7 @@ function ExtendAnother(source={}, target={}, options={}) {
 
         if (Type.function(fun)) {
 
-            fun(i, source[i], target[i]) && doExtend(i);
+            fun(i, source, target) && doExtend(i);
         }
     }
 
