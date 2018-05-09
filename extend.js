@@ -28,8 +28,11 @@ function ExtendAnother(source={}, target={}, options={}) {
       existsNo = [],   // 存在则不继承
     noExistsNo = [],   // 不存在则不继承
            any = true, // 不属于上面任何条件的都继承
+    diffObject = false,// 是否不在原对象(source)上进行操作而返回新对象
            fun = null, // (!deprecate)不属于上面任何条件且any=false, 自定义选择继承与否function(key, source[key], target[key]) { }
              } = options;
+
+    let result = diffObject === true ? { } : source;
 
     let sourceKeys = Object.keys(source);
 
@@ -53,15 +56,15 @@ function ExtendAnother(source={}, target={}, options={}) {
 
                     let sourceKey = mapKey [ i ];
 
-                    source [ sourceKey ] = targetValue;
+                    result [ sourceKey ] = targetValue;
                 }
             } else {
 
-                source[mapKey] = targetValue;
+                result[mapKey] = targetValue;
             }
         } else {
 
-            source[key] = targetValue;
+            result[key] = targetValue;
         }
     }
 
@@ -117,6 +120,6 @@ function ExtendAnother(source={}, target={}, options={}) {
         }
     }
 
-    return source;
+    return result;
 
 }
