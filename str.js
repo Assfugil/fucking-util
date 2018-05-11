@@ -64,9 +64,14 @@ Str.url.querys.objToUrlKeyValArr = function objToUrlKeyValArr(source, ignoreArr)
 
     if (!ignoreArr || ignoreArr.indexOf(key) === -1) {
 
-      let keyValStr = Str.url.querys.mixKeyVal(key, source[key]);
+      if ( Type.empty ( source [ key ] ) ) {
 
-      keyValArr.push(keyValStr);
+      } else {
+
+        let keyValStr = Str.url.querys.mixKeyVal(key, source[key]);
+
+        keyValArr.push(keyValStr);
+      }
     }
   }
 
