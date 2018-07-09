@@ -33,7 +33,7 @@ Str.url.querys.mixKeyVal = function mixKeyVal(key, val) {
   /* [BUG] JSON.stringify => circle refrence */
   let _val = Type.object(val) ? JSON.stringify(val) : String(val);
 
-  return [key, encodeURIComponent(_val)].join('=');
+  return [encodeURIComponent(key), encodeURIComponent(_val)].join('=');
 
   // return [key, _val].join('=');
 };
@@ -42,7 +42,13 @@ Str.url.querys.splitKeyVal = function splitKeyVal(keyValStr) {
 
   let keyVal = keyValStr.split('=');
 
-  return [keyVal[0], decodeURIComponent(keyVal[1])];
+  let key = "";
+  let val = "";
+
+  try { key = decodeURIComponent(keyVal[0]) } catch ( e ) { key = keyVal[0] }
+  try { val = decodeURIComponent(keyVal[1]) } catch ( e ) { val = keyVal[1] }
+
+  return [key, val];
 
   // return keyVal;
 };
@@ -213,12 +219,6 @@ Str.trim = function(str, char=' ') {
   } else 
 
   return nStr;
-};
-
-Str.decodeQuerys  = function(querys) { 
-
-  for (let i in querys) 
-    querys[i] = decodeURIComponent(querys[i]) 
 };
 
 module.exports = Str;
