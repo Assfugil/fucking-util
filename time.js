@@ -2,6 +2,8 @@
 
 module.exports = {
     format: dateFormat,
+    leftFormat: leftTimeFormat,
+    leftTimes: leftTimes,
     monthId: generateMonthId
 };
 
@@ -53,4 +55,96 @@ function generateMonthId(timestamp) {
     let dateStr = dateFormat(timestamp, 'YYYYMM');
 
     return +dateStr;
+}
+
+function leftTimeFormat ( timestamp, formatStr ) {
+
+    let leftTime = timestamp - +new Date;
+
+    return dateFormat ( leftTime, formatStr );
+}
+
+function leftTimes ( timestamp ) {
+
+    //hh:mm:ss
+
+    timestamp = +timestamp;
+
+    let times = {
+        years: 0,
+        fullYears: 0,
+        months: 0,
+        fullMonths: 0,
+        days: 0,
+        fullDays: 0,
+        hours: 0,
+        fullHours: 0,
+        minutes: 0,
+        fullMinutes: 0,
+        seconds: 0,
+        fullSeconds: 0
+    };
+
+    let sec = 1000;
+
+    let min = 60 * sec;
+
+    let hou = 60 * min;
+
+    let day = 24 * hou;
+
+    let mon = 30 * day;
+
+    let yer = 12 * mon;
+
+    let ty = timestamp % yer; // exc year
+
+    let tym = ty % mon; // exc year month
+
+    let tymd = tym % day; // exc year month day
+
+    let tymdh = tymd % hou; // exc year month day hour
+
+    let tymdhm = tymdh % min; // exc year month day minute
+
+    if ( timestamp > yer ) {
+
+        times.years = Math.floor ( timestamp / yer );
+
+        times.fullYears = Math.floor ( timestamp / yer );
+    } else { }
+
+    if ( timestamp > mon ) {
+
+        times.months = Math.floor ( ty / mon );
+
+        times.fullMonths = Math.floor ( timestamp / mon );
+    } else { }
+
+    if ( timestamp >= day ) {
+
+        times.days = Math.floor ( tym / day );
+
+        times.fullDays = Math.floor ( timestamp / day );
+    } else { }
+
+    if ( timestamp >= hou ) {
+
+        times.hours = Math.floor ( tymd / hou );
+
+        times.fullHours = Math.floor ( timestamp / hou );
+    } else { }
+
+    if ( timestamp >= min ) {
+
+        times.minutes = Math.floor ( tymdh / min );
+
+        times.fullMinutes = Math.floor ( timestamp / min );
+    } else { }
+
+    times.seconds = Math.floor ( tymdhm / sec );
+
+    times.fullSeconds = Math.floor ( timestamp / sec );
+
+    return times;
 }
