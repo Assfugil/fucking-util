@@ -63,9 +63,15 @@ Type.empty = function ( object ) {
     return object.length === 0;
   } else if ( Type.objectForce ( object ) ) {
 
-    let keys = Object.keys ( object );
+    if ( object.constructor === Object ) {
 
-    return keys.length === 0;
+      let keys = Object.keys ( object );
+
+      return keys.length === 0;
+    } else {
+
+      return false;
+    }
   } else {
 
     return false;
