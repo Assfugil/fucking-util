@@ -4,6 +4,8 @@ const RndStr = require('./rndStr');
 
 const Type = require('./type');
 
+const Extend = require ( './extend' );
+
 const Str = {};
 
 Str.rnd = RndStr;
@@ -31,7 +33,7 @@ Str.url.querys = {};
 Str.url.querys.mixKeyVal = function mixKeyVal(key, val) {
 
   /* [BUG] JSON.stringify => circle refrence */
-  let _val = Type.object(val) ? JSON.stringify(val) : String(val);
+  let _val = Type.parse.string ( val );
 
   return [encodeURIComponent(key), encodeURIComponent(_val)].join('=');
 
@@ -42,13 +44,13 @@ Str.url.querys.splitKeyVal = function splitKeyVal(keyValStr) {
 
   let keyVal = keyValStr.split('=');
 
-  let key = "";
-  let val = "";
+  let key = '';
+  let val = '';
 
   try { key = decodeURIComponent(keyVal[0]) } catch ( e ) { key = keyVal[0] }
-  try { val = decodeURIComponent(keyVal[1]) } catch ( e ) { val = keyVal[1] }
+  try { val = decodeURIComponent(keyVal[1]||'') } catch ( e ) { val = keyVal[1] }
 
-  return [key, val];
+  return [key, val||''];
 
   // return keyVal;
 };
@@ -101,6 +103,7 @@ Str.url.querys.urlStrToObj = function urlStrToObj(source, ignoreArr) {
       let key = keyVal[0],
           val = keyVal[1];
 
+      if ( Type.empty ( val ) ) { } else 
       if (!ignoreArr || ignoreArr.indexOf(key) === -1) {
 
         sourceObj[key] = val;
@@ -117,6 +120,8 @@ Str.url.querys.objToUrlStr = function objToUrlStr(source, ignoreArr) {
 
   return keyValArr.join('&');
 };
+
+Str.querys = Str.url.querys;
 
 Str.url.build = function buildURL(urlObject) {
 
@@ -140,9 +145,14 @@ Str.url.build = function buildURL(urlObject) {
     urlString = urlString.concat ( ':' ).concat ( urlObject.port );
   } else { }
 
-  urlString = urlString.concat ( '/' );
-
   if ( urlObject.path ) {
+
+    if ( urlObject.path.indexOf ( '/' ) === 0 ) {
+
+    } else {
+
+      urlString = urlString.concat ( '/' );
+    }
 
     urlString = urlString.concat ( urlObject.path );
   } else { }
