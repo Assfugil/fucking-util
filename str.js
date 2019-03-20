@@ -32,6 +32,10 @@ Str.url.querys = {};
 
 Str.url.querys.mixKeyVal = function mixKeyVal(key, val) {
 
+  let source = JSON.parse ( JSON.stringify ( [ key, val ] ) );
+
+  key = source [ 0 ], val = source [ 1 ];
+
   /* [BUG] JSON.stringify => circle refrence */
   let _val = Type.parse.string ( val );
 
@@ -57,6 +61,8 @@ Str.url.querys.splitKeyVal = function splitKeyVal(keyValStr) {
 
 // object to Url 'key=val' Array
 Str.url.querys.objToUrlKeyValArr = function objToUrlKeyValArr(source, ignoreArr) {
+
+  source = JSON.parse ( JSON.stringify ( source ) );
 
   let keyValArr = [];
 
@@ -115,6 +121,8 @@ Str.url.querys.urlStrToObj = function urlStrToObj(source, ignoreArr) {
 };
 
 Str.url.querys.objToUrlStr = function objToUrlStr(source, ignoreArr) {
+
+  source = JSON.parse ( JSON.stringify ( source ) );
 
   let keyValArr = Str.url.querys.objToUrlKeyValArr(source, ignoreArr);
 
