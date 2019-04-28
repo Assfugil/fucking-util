@@ -68,7 +68,7 @@ Str.url.querys.objToUrlKeyValArr = function objToUrlKeyValArr(source, ignoreArr)
 
   let keys = Object.keys(source);
 
-  keys.sort(function(k1, k2) { return k1.localeCompare(k2) });
+  keys.sort ( );
 
   for (let i = 0; i < keys.length; i++) {
 
