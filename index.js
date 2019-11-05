@@ -15,13 +15,7 @@ util.use = function ( key, obj ) {
 
   let keys = Object.keys ( util );
 
-  if ( keys.indexOf ( key ) > -1 ) {
-
-    throw 'util.use: key ' + key + ' has exists';
-  } else {
-
-    util [ key ] = obj;
-  }
+  util [ key ] = obj;
 };
 
 util.useMap = function ( map ) {
