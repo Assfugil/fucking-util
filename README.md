@@ -1,6 +1,7 @@
 # fucking-util
+## Classes
+### Category()
 ## Methods
-### Category()  
 ### Decimal() 
 ### Extend()   
 ### RndStr()  
