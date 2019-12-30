@@ -1,1 +1,3 @@
 # fucking-util
+## Methods
+## Categories
