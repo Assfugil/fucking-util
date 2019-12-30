@@ -1,3 +1,9 @@
 # fucking-util
 ## Methods
-
+### Category()  
+### Decimal() 
+### Extend()   
+### RndStr()  
+### Str()   
+### Time()     
+### Type()      
